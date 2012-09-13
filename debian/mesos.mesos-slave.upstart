@@ -7,11 +7,13 @@ respawn
 
 pre-start script
   [ ! -f "$DEFAULTFILE" ] && { stop; exit 0; }
-  enabled=$(grep RUN_MESOS_SLAVE=yes $DEFAULTFILE)
-  [ -z "$enabled" ] && { stop; exit 0; }
-  ulimit -n 8192
+  . $DEFAULTFILE
 end script
 
 script
-  exec /usr/sbin/mesos-slave --conf=/var/mesos/conf
+  if [ "x$RUN_MESOS_SLAVE" = "xyes" ]
+  then
+    ulimit -n 8192
+    exec /usr/sbin/mesos-slave --conf=/var/mesos/conf
+  fi
 end script
