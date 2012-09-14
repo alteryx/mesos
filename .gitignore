@@ -24,6 +24,10 @@ missing
 .log*
 debian/autoreconf.*
 debian/changelog
+debian/files
+debian/*.debhelper
+debian/mesos.substvars
+debian/mesos
 include/mesos/mesos.hpp
 m4/l*.m4
 mpi/mpiexec-mesos
