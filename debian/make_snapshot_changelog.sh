@@ -24,7 +24,7 @@ if [ -d .git ]; then
   ORIGIN=${1-apache/trunk}
   GIT_COMMIT=`git rev-list -n 1 HEAD --abbrev-commit`
   ORIGIN_COMMIT=`git rev-list -n 1 $ORIGIN --abbrev-commit`
-  SVN_ID=`git log --pretty=format:%B -n 1 $ORIGIN |
+  SVN_ID=`git log --pretty=format:%B $ORIGIN | grep git-svn-id | head -1 |
           perl -ne 'print $1 if /git-svn-id: [^@]+@(\d+)/'`
   ORIGIN_TIME=$(date -u +%Y%m%d -d "$(git log -n 1 $ORIGIN --pretty=format:%ci)")
   GIT_TIME=$(date -u +%Y%m%d -d "$(git log -n 1 HEAD --pretty=format:%ci)")
