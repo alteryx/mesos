@@ -31,4 +31,10 @@ override_dh_usrlocal:
 override_dh_installinit:
 	dh_installinit --name mesos-master
 	dh_installinit --name mesos-slave
-	dh_installinit # for mesos.default
+
+override_dh_auto_install:
+	dh_auto_install
+	mkdir -p debian/mesos/etc/mesos
+	cp -r debian/mesos/var/mesos debian/mesos/etc/mesos/master
+	mv debian/mesos/var/mesos debian/mesos/etc/mesos/slave
+	rmdir debian/mesos/var
